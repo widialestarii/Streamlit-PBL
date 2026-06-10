@@ -1,3 +1,24 @@
+import streamlit as st
+import pandas as pd
+import joblib
+
+st.set_page_config(
+    page_title="Prediksi Tsunami",
+    page_icon="🌊",
+    layout="centered"
+)
+
+@st.cache_resource
+def load_artifacts():
+    model = joblib.load("random_forest_model.pkl")
+    scaler = joblib.load("scaler.pkl")
+    fitur = joblib.load("fitur.pkl")
+    return model, scaler, fitur
+
+model, scaler, FITUR = load_artifacts()
+
+st.title("🌊 Prediksi Potensi Tsunami")
+
 # =====================================
 # Sidebar Input
 # =====================================
