@@ -139,10 +139,13 @@ if st.sidebar.button(
 ):
 
     try:
-        data_input = pd.DataFrame(
-            [[input_user[f] for f in FITUR]],
-            columns=FITUR
-        )
+        data_input = pd.DataFrame({
+    "magnitude": [magnitude],
+    "depth": [depth],
+    "felt": [felt],
+    "country_encoded": [country_encoded],
+    "risk_score": [risk_score]
+})
 
         data_scaled = scaler.transform(data_input)
 
@@ -164,7 +167,16 @@ if st.sidebar.button(
 
         # Menampilkan input
         st.subheader("Data Input")
-        st.dataframe(data_input, use_container_width=True)
+        
+        data_tampil = pd.DataFrame({
+            "Magnitude": [magnitude],
+            "Depth (km)": [depth],
+            "Felt": [felt],
+            "Negara/Wilayah": [negara],
+            "Risk Score": [risk_score]
+        })
+
+        st.dataframe(data_tampil, use_container_width=True)
 
         # Feature Importance
         st.subheader("Feature Importance")
